@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gunting Batu Kertas</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".btn").click(function() {
+        var userPilih = $(this).val();
+        var komputerPilih = getRandomPilihan();
+        var hasil = tentukanHasil(userPilih, komputerPilih);
+        $("#result").html(hasil);
+      });
+
+      function getRandomPilihan() {
+        var pilihan = ["Gunting", "Batu", "Kertas"];
+        return pilihan[Math.floor(Math.random() * pilihan.length)];
+      }
+
+      function tentukanHasil(userPilih, komputerPilih) {
+        if (userPilih === komputerPilih) {
+          return "Seri! Kamu dan komputer memilih " + userPilih;
+        } else if (
+          (userPilih === "Gunting" && komputerPilih === "Kertas") ||
+          (userPilih === "Batu" && komputerPilih === "Gunting") ||
+          (userPilih === "Kertas" && komputerPilih === "Batu")
+        ) {
+          return "Kamu menang! Kamu memilih " + userPilih + ", komputer memilih " + komputerPilih;
+        } else {
+          return "Kamu kalah! Kamu memilih " + userPilih + ", komputer memilih " + komputerPilih;
+        }
+      }
+    });
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Permainan Gunting Batu Kertas</h1>
+    <div>
+      <button class="btn" value="Gunting">Gunting</button>
+      <button class="btn" value="Batu">Batu</button>
+      <button class="btn" value="Kertas">Kertas</button>
+    </div>
+    <h2 id="result">Hasil akan ditampilkan di sini</h2>
+  </div>
+</body>
+</html>
